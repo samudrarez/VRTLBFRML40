@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--projecttitle--><title>Koridor + FormFill</title><!--projecttitle-end-->
+		<!--projectdescription--><meta name="description" content="Lab Tour Ruang Formulasi 40"><!--projectdescription-end-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
+		
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<!-- Insert this line above script imports  -->
+		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+		
+		<script src="imagedata.js"></script>
+		<script src="jquery.js"></script>
+		<script src="three.min.js"></script>
+		<script src="panolens.min.js"></script>
+		
+		<!-- Insert this line after script imports -->
+		<script>if (window.module) module = window.module;</script>
+		
+		<style>
+		
+			
+						
+			/* SCROLLBAR STYLING */
+			/* width */
+			::-webkit-scrollbar {
+				width: 0.25em;
+				height: 0.25em;
+			}
+			/* Track */
+			::-webkit-scrollbar-track {
+				background: #2c3643; 
+			}
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+				background: #0d9e59; 
+				transition: background .5s;
+			}
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: #00e075; 
+			}
+
+
+			html, body {
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: #000;
+				color; black;
+			}
+
+			a:link, a:visited{
+				color: #bdc3c7;	
+			}
+
+			.fullwrapper{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: black;
+			}
+			
+			#container {
+                width: 100%;
+                height: 100%;
+            }
+			
+			#tmp{
+				position: fixed;
+				top: 0;
+				left: 0; 
+				right: 0;
+				bottom: 0;
+				padding: 3em;
+				background-color: rgba(0,0,0,.5);
+				backdrop-filter: blur(5px);
+				display: none;
+			}
+		</style>
+	</head>
+	<body id="body">
+	    <div id="container" style="color: black;"></div>
+    	
+		
+		
+		<!--customhtml--><div class='customhotspot' id='airshower'></div><div class='customhotspot' id='capping'></div><div class='customhotspot' id='dekatfilling'></div><div class='customhotspot' id='dekatformulasi'></div><div class='customhotspot' id='dekatIPC'></div><div class='customhotspot' id='dekatpassbox'></div><div class='customhotspot' id='dressroomB'></div><div class='customhotspot' id='dressroomC'></div><div class='customhotspot' id='dressroomD'></div><div class='customhotspot' id='fillingcapping'></div><div class='customhotspot' id='formulasi'></div><div class='customhotspot' id='infeedfilling'></div><div class='customhotspot' id='jendeladekatcapping'></div><div class='customhotspot' id='koridormenujuruangfrezer'></div><div class='customhotspot' id='masukarealoker'></div><div class='customhotspot' id='mejaEMdanteknikalarea'></div><div class='customhotspot' id='otoklafdesinfeksi'></div><div class='customhotspot' id='panelmesincapping'></div><div class='customhotspot' id='passroomB'></div><div class='customhotspot' id='passroomC'></div><div class='customhotspot' id='pintumasukformulasi'></div><div class='customhotspot' id='rejectcapping'></div><div class='customhotspot' id='stoppering'></div><!--customhtml-end-->
+		
+		<div id="tmp">
+			<div style="width: 100%; height: 100%; overflow: hidden; overflow-y: auto; box-sizing: border-box; position: relative;" id="tmpcontent"></div>
+			<div class="mediaclosebutton" onclick="hideTemp()"><i class="fa fa-times-circle"></i></div>
+		</div>
+
+		<div id="loading" class="fullwrapper" style="display: table; width: 100%; height: 100%;">
+    		<div style="display: table-cell; vertical-align: middle; text-align: center; color: white; font-size: 30px; padding: 50px;">
+    			<!--loadingtext-->Harap Tunggu...<!--loadingtext-end-->
+				<div id="loadingperc" style="font-size:12px;"></div>
+    		</div>
+    	</div>
+		
+    	<script>
+			
+            var container = document.querySelector( '#container' );
+			/*panolens*/
+var viewer = new PANOLENS.Viewer( { container: container , controlBar: true,  output: 'console' , autoHideInfospot: false, } );
+/*panolens-end*/
+			
+			viewer.addUpdateCallback(function(){});
+			
+			/*panoramas*/
+var airshower = new PANOLENS.ImagePanorama( "panoramas/airshower.jpg" );
+			airshower.addEventListener('progress', onProgress);
+			airshower.addEventListener('load', function(e){
+				endLoading();
+			});
+			airshower.addEventListener('enter', function(e){
+				endLoading();
+			});
+			airshower.addEventListener('click', function(e){
+			});
+
+var infospotairshower0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotairshower0.position.set( -3280.28, -3690.21, 753.72 );
+					airshower.add(infospotairshower0);
+infospotairshower0.addEventListener('click', function(){
+ChangePanorama('dressroomB');
+});
+var infospotairshower1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotairshower1.position.set( 2234.74, -3731.20, 2459.47 );
+					airshower.add(infospotairshower1);
+infospotairshower1.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+viewer.add( airshower );
+var capping = new PANOLENS.ImagePanorama( "panoramas/capping.jpg" );
+			capping.addEventListener('progress', onProgress);
+			capping.addEventListener('load', function(e){
+				endLoading();
+			});
+			capping.addEventListener('enter', function(e){
+				endLoading();
+			});
+			capping.addEventListener('click', function(e){
+			});
+
+var infospotcapping0 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotcapping0.position.set( -4881.73, -797.10, 684.49 );
+					capping.add(infospotcapping0);
+infospotcapping0.addEventListener('click', function(){
+ChangePanorama('infeedfilling');
+});
+var infospotcapping1 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotcapping1.position.set( -4471.10, -545.02, 2149.65 );
+					capping.add(infospotcapping1);
+infospotcapping1.addEventListener('click', function(){
+ChangePanorama('stoppering');
+});
+var infospotcapping2 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotcapping2.position.set( -4404.61, -1398.67, 1891.74 );
+					capping.add(infospotcapping2);
+infospotcapping2.addEventListener('click', function(){
+ChangePanorama('fillingcapping');
+});
+var infospotcapping3 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotcapping3.position.set( 2006.05, -501.01, -4548.08 );
+					capping.add(infospotcapping3);
+infospotcapping3.addEventListener('click', function(){
+ChangePanorama('jendeladekatcapping');
+});
+viewer.add( capping );
+var dekatfilling = new PANOLENS.ImagePanorama( "panoramas/dekatfilling.jpg" );
+			dekatfilling.addEventListener('progress', onProgress);
+			dekatfilling.addEventListener('load', function(e){
+				endLoading();
+			});
+			dekatfilling.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dekatfilling.addEventListener('click', function(e){
+			});
+
+var infospotdekatfilling0 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatfilling0.position.set( -4637.87, -1775.34, -531.63 );
+					dekatfilling.add(infospotdekatfilling0);
+infospotdekatfilling0.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+var infospotdekatfilling1 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatfilling1.position.set( 4327.18, -2442.26, 502.80 );
+					dekatfilling.add(infospotdekatfilling1);
+infospotdekatfilling1.addEventListener('click', function(){
+ChangePanorama('dekatformulasi');
+});
+var infospotdekatfilling2 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatfilling2.position.set( -4171.99, -101.79, 2736.17 );
+					dekatfilling.add(infospotdekatfilling2);
+infospotdekatfilling2.addEventListener('click', function(){
+ChangePanorama('panelmesincapping');
+});
+var infospotdekatfilling3 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatfilling3.position.set( -1233.67, -985.61, 4733.25 );
+					dekatfilling.add(infospotdekatfilling3);
+infospotdekatfilling3.addEventListener('click', function(){
+ChangePanorama('fillingcapping');
+});
+var infospotdekatfilling4 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatfilling4.position.set( 2571.24, -774.26, 4211.68 );
+					dekatfilling.add(infospotdekatfilling4);
+infospotdekatfilling4.addEventListener('click', function(){
+ChangePanorama('stoppering');
+});
+var infospotdekatfilling5 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatfilling5.position.set( 4549.93, -485.34, 2006.42 );
+					dekatfilling.add(infospotdekatfilling5);
+infospotdekatfilling5.addEventListener('click', function(){
+ChangePanorama('formulasi');
+});
+viewer.add( dekatfilling );
+var dekatformulasi = new PANOLENS.ImagePanorama( "panoramas/dekatformulasi.jpg" );
+			dekatformulasi.addEventListener('progress', onProgress);
+			dekatformulasi.addEventListener('load', function(e){
+				endLoading();
+			});
+			dekatformulasi.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dekatformulasi.addEventListener('click', function(e){
+			});
+
+var infospotdekatformulasi0 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatformulasi0.position.set( -4321.14, -2383.09, 752.52 );
+					dekatformulasi.add(infospotdekatformulasi0);
+infospotdekatformulasi0.addEventListener('click', function(){
+ChangePanorama('dekatfilling');
+});
+var infospotdekatformulasi1 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatformulasi1.position.set( -4840.50, -1013.46, 670.11 );
+					dekatformulasi.add(infospotdekatformulasi1);
+infospotdekatformulasi1.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+var infospotdekatformulasi2 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatformulasi2.position.set( 139.39, -1765.70, 4666.59 );
+					dekatformulasi.add(infospotdekatformulasi2);
+infospotdekatformulasi2.addEventListener('click', function(){
+ChangePanorama('formulasi');
+});
+viewer.add( dekatformulasi );
+var dekatIPC = new PANOLENS.ImagePanorama( "panoramas/dekatIPC.jpg" );
+			dekatIPC.addEventListener('progress', onProgress);
+			dekatIPC.addEventListener('load', function(e){
+				endLoading();
+			});
+			dekatIPC.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dekatIPC.addEventListener('click', function(e){
+			});
+
+var infospotdekatIPC0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdekatIPC0.position.set( -4487.89, -1002.77, -1947.84 );
+					dekatIPC.add(infospotdekatIPC0);
+infospotdekatIPC0.addEventListener('click', function(){
+ChangePanorama('airshower');
+});
+var infospotdekatIPC1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdekatIPC1.position.set( -4241.30, -15.77, 2635.65 );
+					dekatIPC.add(infospotdekatIPC1);
+infospotdekatIPC1.addEventListener('click', function(){
+ChangePanorama('passroomB');
+});
+var infospotdekatIPC2 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatIPC2.position.set( -2328.20, -2488.56, 3647.02 );
+					dekatIPC.add(infospotdekatIPC2);
+infospotdekatIPC2.addEventListener('click', function(){
+ChangePanorama('dekatpassbox');
+});
+var infospotdekatIPC3 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatIPC3.position.set( 4561.96, -2015.17, -201.00 );
+					dekatIPC.add(infospotdekatIPC3);
+infospotdekatIPC3.addEventListener('click', function(){
+ChangePanorama('dekatfilling');
+});
+var infospotdekatIPC4 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatIPC4.position.set( 4849.45, -1139.03, -343.64 );
+					dekatIPC.add(infospotdekatIPC4);
+infospotdekatIPC4.addEventListener('click', function(){
+ChangePanorama('dekatformulasi');
+});
+var infospotdekatIPC5 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatIPC5.position.set( -836.79, -644.93, 4877.04 );
+					dekatIPC.add(infospotdekatIPC5);
+infospotdekatIPC5.addEventListener('click', function(){
+ChangePanorama('rejectcapping');
+});
+var infospotdekatIPC6 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotdekatIPC6.position.set( 3773.90, -118.39, 3266.43 );
+					dekatIPC.add(infospotdekatIPC6);
+infospotdekatIPC6.addEventListener('click', function(){
+ChangePanorama('panelmesincapping');
+});
+viewer.add( dekatIPC );
+var dekatpassbox = new PANOLENS.ImagePanorama( "panoramas/dekatpassbox.jpg" );
+			dekatpassbox.addEventListener('progress', onProgress);
+			dekatpassbox.addEventListener('load', function(e){
+				endLoading();
+			});
+			dekatpassbox.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dekatpassbox.addEventListener('click', function(e){
+			});
+
+var infospotdekatpassbox0 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotdekatpassbox0.position.set( -4385.22, -2377.91, 178.58 );
+					dekatpassbox.add(infospotdekatpassbox0);
+infospotdekatpassbox0.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+var infospotdekatpassbox1 = new PANOLENS.Infospot( 512, hotspotIcons[6].data, true );
+					infospotdekatpassbox1.position.set( 429.57, -890.80, -4894.32 );
+					dekatpassbox.add(infospotdekatpassbox1);
+infospotdekatpassbox1.addEventListener('click', function(){
+ChangePanorama('jendeladekatcapping');
+});
+viewer.add( dekatpassbox );
+var dressroomB = new PANOLENS.ImagePanorama( "panoramas/dressroomB.jpg" );
+			dressroomB.addEventListener('progress', onProgress);
+			dressroomB.addEventListener('load', function(e){
+				endLoading();
+			});
+			dressroomB.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dressroomB.addEventListener('click', function(e){
+			});
+
+var infospotdressroomB0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomB0.position.set( -4352.24, -105.19, -2447.51 );
+					dressroomB.add(infospotdressroomB0);
+infospotdressroomB0.addEventListener('click', function(){
+ChangePanorama('dressroomC');
+});
+var infospotdressroomB1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomB1.position.set( -3680.60, -1732.59, 2890.93 );
+					dressroomB.add(infospotdressroomB1);
+infospotdressroomB1.addEventListener('click', function(){
+ChangePanorama('airshower');
+});
+viewer.add( dressroomB );
+var dressroomC = new PANOLENS.ImagePanorama( "panoramas/dressroomC.jpg" );
+			dressroomC.addEventListener('progress', onProgress);
+			dressroomC.addEventListener('load', function(e){
+				endLoading();
+			});
+			dressroomC.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dressroomC.addEventListener('click', function(e){
+			});
+
+var infospotdressroomC0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomC0.position.set( 4251.46, -2517.97, -710.24 );
+					dressroomC.add(infospotdressroomC0);
+infospotdressroomC0.addEventListener('click', function(){
+ChangePanorama('dressroomD');
+});
+var infospotdressroomC1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomC1.position.set( -3446.72, -72.21, -3610.65 );
+					dressroomC.add(infospotdressroomC1);
+infospotdressroomC1.addEventListener('click', function(){
+ChangePanorama('dressroomB');
+});
+viewer.add( dressroomC );
+var dressroomD = new PANOLENS.ImagePanorama( "panoramas/dressroomD.jpg" );
+			dressroomD.addEventListener('progress', onProgress);
+			dressroomD.addEventListener('load', function(e){
+				endLoading();
+			});
+			dressroomD.addEventListener('enter', function(e){
+				endLoading();
+			});
+			dressroomD.addEventListener('click', function(e){
+			});
+
+var infospotdressroomD0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomD0.position.set( -3623.01, -2457.84, -2396.69 );
+					dressroomD.add(infospotdressroomD0);
+infospotdressroomD0.addEventListener('click', function(){
+ChangePanorama('pintumasukformulasi');
+});
+var infospotdressroomD1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomD1.position.set( 4405.76, -2339.25, -199.63 );
+					dressroomD.add(infospotdressroomD1);
+infospotdressroomD1.addEventListener('click', function(){
+ChangePanorama('dressroomC');
+});
+var infospotdressroomD2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdressroomD2.position.set( 1587.12, -3112.23, 3571.56 );
+					dressroomD.add(infospotdressroomD2);
+infospotdressroomD2.addEventListener('click', function(){
+ChangePanorama('passroomC');
+});
+viewer.add( dressroomD );
+var fillingcapping = new PANOLENS.ImagePanorama( "panoramas/fillingcapping.jpg" );
+			fillingcapping.addEventListener('progress', onProgress);
+			fillingcapping.addEventListener('load', function(e){
+				endLoading();
+			});
+			fillingcapping.addEventListener('enter', function(e){
+				endLoading();
+			});
+			fillingcapping.addEventListener('click', function(e){
+			});
+
+var infospotfillingcapping0 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotfillingcapping0.position.set( 4366.11, -430.65, -2385.49 );
+					fillingcapping.add(infospotfillingcapping0);
+infospotfillingcapping0.addEventListener('click', function(){
+ChangePanorama('capping');
+});
+var infospotfillingcapping1 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotfillingcapping1.position.set( -3375.34, -790.33, -3596.81 );
+					fillingcapping.add(infospotfillingcapping1);
+infospotfillingcapping1.addEventListener('click', function(){
+ChangePanorama('infeedfilling');
+});
+var infospotfillingcapping2 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotfillingcapping2.position.set( -4679.26, -566.38, 1642.78 );
+					fillingcapping.add(infospotfillingcapping2);
+infospotfillingcapping2.addEventListener('click', function(){
+ChangePanorama('stoppering');
+});
+var infospotfillingcapping3 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotfillingcapping3.position.set( 4874.58, -105.69, -1083.84 );
+					fillingcapping.add(infospotfillingcapping3);
+infospotfillingcapping3.addEventListener('click', function(){
+ChangePanorama('panelmesincapping');
+});
+var infospotfillingcapping4 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotfillingcapping4.position.set( -535.75, -291.72, 4958.94 );
+					fillingcapping.add(infospotfillingcapping4);
+infospotfillingcapping4.addEventListener('click', function(){
+ChangePanorama('dekatfilling');
+});
+var infospotfillingcapping5 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotfillingcapping5.position.set( 4640.04, -1084.60, 1505.56 );
+					fillingcapping.add(infospotfillingcapping5);
+infospotfillingcapping5.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+viewer.add( fillingcapping );
+var formulasi = new PANOLENS.ImagePanorama( "panoramas/formulasi.jpg" );
+			formulasi.addEventListener('progress', onProgress);
+			formulasi.addEventListener('load', function(e){
+				endLoading();
+			});
+			formulasi.addEventListener('enter', function(e){
+				endLoading();
+			});
+			formulasi.addEventListener('click', function(e){
+			});
+
+var infospotformulasi0 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotformulasi0.position.set( 2350.71, -1073.37, 4272.28 );
+					formulasi.add(infospotformulasi0);
+infospotformulasi0.addEventListener('click', function(){
+ChangePanorama('mejaEMdanteknikalarea');
+});
+var infospotformulasi1 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotformulasi1.position.set( -896.51, -1208.65, -4761.90 );
+					formulasi.add(infospotformulasi1);
+infospotformulasi1.addEventListener('click', function(){
+ChangePanorama('dekatformulasi');
+});
+viewer.add( formulasi );
+var infeedfilling = new PANOLENS.ImagePanorama( "panoramas/infeedfilling.jpg" );
+			infeedfilling.addEventListener('progress', onProgress);
+			infeedfilling.addEventListener('load', function(e){
+				endLoading();
+			});
+			infeedfilling.addEventListener('enter', function(e){
+				endLoading();
+			});
+			infeedfilling.addEventListener('click', function(e){
+			});
+
+var infospotinfeedfilling0 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotinfeedfilling0.position.set( -1739.74, -1307.34, 4490.52 );
+					infeedfilling.add(infospotinfeedfilling0);
+infospotinfeedfilling0.addEventListener('click', function(){
+ChangePanorama('mejaEMdanteknikalarea');
+});
+var infospotinfeedfilling1 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotinfeedfilling1.position.set( 1176.39, -575.22, -4815.75 );
+					infeedfilling.add(infospotinfeedfilling1);
+infospotinfeedfilling1.addEventListener('click', function(){
+ChangePanorama('capping');
+});
+var infospotinfeedfilling2 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotinfeedfilling2.position.set( 2263.56, -3689.67, -2494.10 );
+					infeedfilling.add(infospotinfeedfilling2);
+infospotinfeedfilling2.addEventListener('click', function(){
+ChangePanorama('fillingcapping');
+});
+viewer.add( infeedfilling );
+var jendeladekatcapping = new PANOLENS.ImagePanorama( "panoramas/jendeladekatcapping.jpg" );
+			jendeladekatcapping.addEventListener('progress', onProgress);
+			jendeladekatcapping.addEventListener('load', function(e){
+				endLoading();
+			});
+			jendeladekatcapping.addEventListener('enter', function(e){
+				endLoading();
+			});
+			jendeladekatcapping.addEventListener('click', function(e){
+			});
+
+var infospotjendeladekatcapping0 = new PANOLENS.Infospot( 512, hotspotIcons[6].data, true );
+					infospotjendeladekatcapping0.position.set( 154.31, -1336.94, 4805.90 );
+					jendeladekatcapping.add(infospotjendeladekatcapping0);
+infospotjendeladekatcapping0.addEventListener('click', function(){
+ChangePanorama('dekatpassbox');
+});
+var infospotjendeladekatcapping1 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotjendeladekatcapping1.position.set( -371.57, -1122.74, -4851.23 );
+					jendeladekatcapping.add(infospotjendeladekatcapping1);
+infospotjendeladekatcapping1.addEventListener('click', function(){
+ChangePanorama('mejaEMdanteknikalarea');
+});
+var infospotjendeladekatcapping2 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotjendeladekatcapping2.position.set( -3689.32, -670.56, -3301.54 );
+					jendeladekatcapping.add(infospotjendeladekatcapping2);
+infospotjendeladekatcapping2.addEventListener('click', function(){
+ChangePanorama('capping');
+});
+viewer.add( jendeladekatcapping );
+var koridormenujuruangfrezer = new PANOLENS.ImagePanorama( "panoramas/koridormenujuruangfrezer.jpg" );
+			koridormenujuruangfrezer.addEventListener('progress', onProgress);
+			koridormenujuruangfrezer.addEventListener('load', function(e){
+				endLoading();
+			});
+			koridormenujuruangfrezer.addEventListener('enter', function(e){
+				endLoading();
+			});
+			koridormenujuruangfrezer.addEventListener('click', function(e){
+			});
+
+var infospotkoridormenujuruangfrezer0 = new PANOLENS.Infospot( 512, hotspotIcons[3].data, true );
+					infospotkoridormenujuruangfrezer0.position.set( -4970.02, -188.73, -430.66 );
+					koridormenujuruangfrezer.add(infospotkoridormenujuruangfrezer0);
+infospotkoridormenujuruangfrezer0.addEventListener('click', function(){
+ChangePanorama('masukarealoker');
+});
+var infospotkoridormenujuruangfrezer1 = new PANOLENS.Infospot( 512, hotspotIcons[4].data, true );
+					infospotkoridormenujuruangfrezer1.position.set( 4891.73, -134.90, -999.46 );
+					koridormenujuruangfrezer.add(infospotkoridormenujuruangfrezer1);
+infospotkoridormenujuruangfrezer1.addEventListener('click', function(){
+ChangePanorama('otoklafdesinfeksi');
+});
+viewer.add( koridormenujuruangfrezer );
+var masukarealoker = new PANOLENS.ImagePanorama( "panoramas/masukarealoker.jpg" );
+			masukarealoker.addEventListener('progress', onProgress);
+			masukarealoker.addEventListener('load', function(e){
+				endLoading();
+			});
+			masukarealoker.addEventListener('enter', function(e){
+				endLoading();
+			});
+			masukarealoker.addEventListener('click', function(e){
+			});
+
+var infospotmasukarealoker0 = new PANOLENS.Infospot( 512, hotspotIcons[4].data, true );
+					infospotmasukarealoker0.position.set( 788.17, -902.21, 4844.17 );
+					masukarealoker.add(infospotmasukarealoker0);
+infospotmasukarealoker0.addEventListener('click', function(){
+ChangePanorama('koridormenujuruangfrezer');
+});
+viewer.add( masukarealoker );
+var mejaEMdanteknikalarea = new PANOLENS.ImagePanorama( "panoramas/mejaEMdanteknikalarea.jpg" );
+			mejaEMdanteknikalarea.addEventListener('progress', onProgress);
+			mejaEMdanteknikalarea.addEventListener('load', function(e){
+				endLoading();
+			});
+			mejaEMdanteknikalarea.addEventListener('enter', function(e){
+				endLoading();
+			});
+			mejaEMdanteknikalarea.addEventListener('click', function(e){
+			});
+
+var infospotmejaEMdanteknikalarea0 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotmejaEMdanteknikalarea0.position.set( -10.06, -767.14, 4939.69 );
+					mejaEMdanteknikalarea.add(infospotmejaEMdanteknikalarea0);
+infospotmejaEMdanteknikalarea0.addEventListener('click', function(){
+ChangePanorama('formulasi');
+});
+var infospotmejaEMdanteknikalarea1 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotmejaEMdanteknikalarea1.position.set( 4835.03, -1225.52, 198.03 );
+					mejaEMdanteknikalarea.add(infospotmejaEMdanteknikalarea1);
+infospotmejaEMdanteknikalarea1.addEventListener('click', function(){
+ChangePanorama('jendeladekatcapping');
+});
+var infospotmejaEMdanteknikalarea2 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotmejaEMdanteknikalarea2.position.set( 4591.96, -875.61, 1747.22 );
+					mejaEMdanteknikalarea.add(infospotmejaEMdanteknikalarea2);
+infospotmejaEMdanteknikalarea2.addEventListener('click', function(){
+ChangePanorama('infeedfilling');
+});
+viewer.add( mejaEMdanteknikalarea );
+var otoklafdesinfeksi = new PANOLENS.ImagePanorama( "panoramas/otoklafdesinfeksi.jpg" );
+			otoklafdesinfeksi.addEventListener('progress', onProgress);
+			otoklafdesinfeksi.addEventListener('load', function(e){
+				endLoading();
+			});
+			otoklafdesinfeksi.addEventListener('enter', function(e){
+				endLoading();
+			});
+			otoklafdesinfeksi.addEventListener('click', function(e){
+			});
+
+var infospototoklafdesinfeksi0 = new PANOLENS.Infospot( 512, hotspotIcons[3].data, true );
+					infospototoklafdesinfeksi0.position.set( 2089.74, -376.70, -4522.58 );
+					otoklafdesinfeksi.add(infospototoklafdesinfeksi0);
+infospototoklafdesinfeksi0.addEventListener('click', function(){
+ChangePanorama('koridormenujuruangfrezer');
+});
+var infospototoklafdesinfeksi1 = new PANOLENS.Infospot( 512, hotspotIcons[6].data, true );
+					infospototoklafdesinfeksi1.position.set( -671.24, -665.28, 4900.82 );
+					otoklafdesinfeksi.add(infospototoklafdesinfeksi1);
+infospototoklafdesinfeksi1.addEventListener('click', function(){
+ChangePanorama('pintumasukformulasi');
+});
+viewer.add( otoklafdesinfeksi );
+var panelmesincapping = new PANOLENS.ImagePanorama( "panoramas/panelmesincapping.jpg" );
+			panelmesincapping.addEventListener('progress', onProgress);
+			panelmesincapping.addEventListener('load', function(e){
+				endLoading();
+			});
+			panelmesincapping.addEventListener('enter', function(e){
+				endLoading();
+			});
+			panelmesincapping.addEventListener('click', function(e){
+			});
+
+var infospotpanelmesincapping0 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotpanelmesincapping0.position.set( -1980.82, -1557.64, 4315.19 );
+					panelmesincapping.add(infospotpanelmesincapping0);
+infospotpanelmesincapping0.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+var infospotpanelmesincapping1 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotpanelmesincapping1.position.set( -2778.47, -2538.04, -3281.81 );
+					panelmesincapping.add(infospotpanelmesincapping1);
+infospotpanelmesincapping1.addEventListener('click', function(){
+ChangePanorama('fillingcapping');
+});
+var infospotpanelmesincapping2 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotpanelmesincapping2.position.set( -4500.84, -1843.44, -1125.77 );
+					panelmesincapping.add(infospotpanelmesincapping2);
+infospotpanelmesincapping2.addEventListener('click', function(){
+ChangePanorama('dekatfilling');
+});
+viewer.add( panelmesincapping );
+var passroomB = new PANOLENS.ImagePanorama( "panoramas/passroomB.jpg" );
+			passroomB.addEventListener('progress', onProgress);
+			passroomB.addEventListener('load', function(e){
+				endLoading();
+			});
+			passroomB.addEventListener('enter', function(e){
+				endLoading();
+			});
+			passroomB.addEventListener('click', function(e){
+			});
+
+var infospotpassroomB0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotpassroomB0.position.set( -3803.44, -41.28, -3234.76 );
+					passroomB.add(infospotpassroomB0);
+infospotpassroomB0.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+var infospotpassroomB1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotpassroomB1.position.set( 3702.18, -94.49, -3353.96 );
+					passroomB.add(infospotpassroomB1);
+infospotpassroomB1.addEventListener('click', function(){
+ChangePanorama('passroomC');
+});
+viewer.add( passroomB );
+var passroomC = new PANOLENS.ImagePanorama( "panoramas/passroomC.jpg" );
+			passroomC.addEventListener('progress', onProgress);
+			passroomC.addEventListener('load', function(e){
+				endLoading();
+			});
+			passroomC.addEventListener('enter', function(e){
+				endLoading();
+			});
+			passroomC.addEventListener('click', function(e){
+			});
+
+var infospotpassroomC0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotpassroomC0.position.set( 98.45, -2965.18, -4019.23 );
+					passroomC.add(infospotpassroomC0);
+infospotpassroomC0.addEventListener('click', function(){
+ChangePanorama('dressroomD');
+});
+var infospotpassroomC1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotpassroomC1.position.set( 4387.80, -39.50, 2383.39 );
+					passroomC.add(infospotpassroomC1);
+infospotpassroomC1.addEventListener('click', function(){
+ChangePanorama('passroomB');
+});
+viewer.add( passroomC );
+var pintumasukformulasi = new PANOLENS.ImagePanorama( "panoramas/pintumasukformulasi.jpg" );
+			pintumasukformulasi.addEventListener('progress', onProgress);
+			pintumasukformulasi.addEventListener('load', function(e){
+				endLoading();
+			});
+			pintumasukformulasi.addEventListener('enter', function(e){
+				endLoading();
+			});
+			pintumasukformulasi.addEventListener('click', function(e){
+			});
+
+var infospotpintumasukformulasi0 = new PANOLENS.Infospot( 512, hotspotIcons[6].data, true );
+					infospotpintumasukformulasi0.position.set( -402.64, -365.39, 4964.54 );
+					pintumasukformulasi.add(infospotpintumasukformulasi0);
+infospotpintumasukformulasi0.addEventListener('click', function(){
+ChangePanorama('otoklafdesinfeksi');
+});
+var infospotpintumasukformulasi1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotpintumasukformulasi1.position.set( 3902.30, -2551.99, -1793.47 );
+					pintumasukformulasi.add(infospotpintumasukformulasi1);
+infospotpintumasukformulasi1.addEventListener('click', function(){
+ChangePanorama('dressroomD');
+});
+viewer.add( pintumasukformulasi );
+var rejectcapping = new PANOLENS.ImagePanorama( "panoramas/rejectcapping.jpg" );
+			rejectcapping.addEventListener('progress', onProgress);
+			rejectcapping.addEventListener('load', function(e){
+				endLoading();
+			});
+			rejectcapping.addEventListener('enter', function(e){
+				endLoading();
+			});
+			rejectcapping.addEventListener('click', function(e){
+			});
+
+var infospotrejectcapping0 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotrejectcapping0.position.set( 1348.51, -3054.02, 3712.24 );
+					rejectcapping.add(infospotrejectcapping0);
+infospotrejectcapping0.addEventListener('click', function(){
+ChangePanorama('dekatIPC');
+});
+var infospotrejectcapping1 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+					infospotrejectcapping1.position.set( -3043.20, 181.13, -3951.50 );
+					rejectcapping.add(infospotrejectcapping1);
+infospotrejectcapping1.addEventListener('click', function(){
+ChangePanorama('jendeladekatcapping');
+});
+var infospotrejectcapping2 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotrejectcapping2.position.set( 4260.64, -1059.53, -2379.61 );
+					rejectcapping.add(infospotrejectcapping2);
+infospotrejectcapping2.addEventListener('click', function(){
+ChangePanorama('dekatpassbox');
+});
+viewer.add( rejectcapping );
+var stoppering = new PANOLENS.ImagePanorama( "panoramas/stoppering.jpg" );
+			stoppering.addEventListener('progress', onProgress);
+			stoppering.addEventListener('load', function(e){
+				endLoading();
+			});
+			stoppering.addEventListener('enter', function(e){
+				endLoading();
+			});
+			stoppering.addEventListener('click', function(e){
+			});
+
+var infospotstoppering0 = new PANOLENS.Infospot( 512, hotspotIcons[5].data, true );
+					infospotstoppering0.position.set( 3304.38, -3310.18, -1750.01 );
+					stoppering.add(infospotstoppering0);
+infospotstoppering0.addEventListener('click', function(){
+ChangePanorama('dekatfilling');
+});
+var infospotstoppering1 = new PANOLENS.Infospot( 512, hotspotIcons[12].data, true );
+					infospotstoppering1.position.set( -1106.35, -2899.01, -3913.17 );
+					stoppering.add(infospotstoppering1);
+infospotstoppering1.addEventListener('click', function(){
+ChangePanorama('fillingcapping');
+});
+viewer.add( stoppering );
+$(document).ready(function(){ ChangePanorama('dekatIPC'); });
+
+/*panoramas-end*/
+            
+			var stilloading = true;
+			function onProgress ( event ) {
+				
+				progress = event.progress.loaded / event.progress.total * 100;
+				console.log("Loading panorama: " + progress + " ... ");
+				$("#loadingperc").html(Math.ceil(progress) + "%");
+				if(Math.ceil(progress) >= 100){
+					endLoading();
+					stilloading = false;
+
+				}else{
+				    clearTimeout(elTimer);
+					stilloading = true;
+					$("#loading").show();
+				}
+			}
+			
+			var elTimer;
+			function endLoading(){
+			    clearTimeout(elTimer);
+				if(stilloading == false){
+					elTimer = setTimeout(function(){
+						$("#loading").fadeOut();
+					}, 750);
+					
+				}
+			}
+			
+			function hideTemp(){
+				$("#tmp").fadeOut();
+				setTimeout(function(){
+					$("#tmpcontent").html("");
+				},1000);
+			}
+			
+			function showMedia(type, content){
+				switch(type){
+					case 1 :
+						//Image
+						$("#tmpcontent").html("<img src='"+content+"' style='width: 100%;'>");
+						$("#tmp").fadeIn();
+						break;
+					case 2 :
+						//Video
+						$("#tmpcontent").html("<video id='webvideo' controls autoplay style='width: 100%; height: 100%;'><source src='" +content+ "' type='video/mp4'> Your browser does not support the video tag. </video>");
+						$("#tmp").fadeIn();
+						break;
+					case 3 :
+						//Audio
+						$("#tmpcontent").html("<audio controls style='width: 100%;'><source src='"+content+"' type='audio/ogg'>Your browser does not support the audio tag.</audio>");
+						$("#tmp").fadeIn();
+						break;
+					case 4 :
+						//PDF
+						$("#tmpcontent").html("<iframe src='pdfjs/web/viewer.html?file=../../"+content+"' style='width: 100%; height: 99%;'></iframe>");
+						$("#tmp").fadeIn();
+						break;
+				}
+			}
+			
+			
+			
+			//Update Callback
+			viewer.addUpdateCallback(function(){
+				
+				/*viewerupdatecallback*/
+if(viewer.panorama == airshower){
+}
+
+if(viewer.panorama == capping){
+}
+
+if(viewer.panorama == dekatfilling){
+}
+
+if(viewer.panorama == dekatformulasi){
+}
+
+if(viewer.panorama == dekatIPC){
+}
+
+if(viewer.panorama == dekatpassbox){
+}
+
+if(viewer.panorama == dressroomB){
+}
+
+if(viewer.panorama == dressroomC){
+}
+
+if(viewer.panorama == dressroomD){
+}
+
+if(viewer.panorama == fillingcapping){
+}
+
+if(viewer.panorama == formulasi){
+}
+
+if(viewer.panorama == infeedfilling){
+}
+
+if(viewer.panorama == jendeladekatcapping){
+}
+
+if(viewer.panorama == koridormenujuruangfrezer){
+}
+
+if(viewer.panorama == masukarealoker){
+}
+
+if(viewer.panorama == mejaEMdanteknikalarea){
+}
+
+if(viewer.panorama == otoklafdesinfeksi){
+}
+
+if(viewer.panorama == panelmesincapping){
+}
+
+if(viewer.panorama == passroomB){
+}
+
+if(viewer.panorama == passroomC){
+}
+
+if(viewer.panorama == pintumasukformulasi){
+}
+
+if(viewer.panorama == rejectcapping){
+}
+
+if(viewer.panorama == stoppering){
+}
+/*viewerupdatecallback-end*/
+				
+				
+			});
+			
+			
+			
+			var hotspotsvisible = true;
+			function ShowMyInfospot(hs, elid){
+				var thehs = toScreenPosition(hs);
+				if(thehs.z < 1){
+					$("#" + elid).css({
+						"top" : (thehs.y - ($("#" + elid).height()/2)) + "px",
+						"left" : (thehs.x - ($("#" + elid).width()/2)) + "px",
+					});
+					if(hotspotsvisible)
+						$("#" + elid).show();
+				}else{
+					$("#" + elid).hide();
+				}
+				
+			}
+			
+			function toScreenPosition(obj)
+			{
+				var vector = new THREE.Vector3();
+				var widthHalf = 0.5 * innerWidth;
+				var heightHalf = 0.5 * innerHeight;
+				
+				//obj.updateMatrixWorld();				
+				vector.setFromMatrixPosition(obj.matrixWorld);
+				
+				
+				vector.project(viewer.camera);
+
+				vector.x = ( vector.x * widthHalf ) + widthHalf;
+				vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+				
+				return { 
+					x: vector.x,
+					y: vector.y,
+					z: vector.z,
+				};
+
+			};
+			
+			var currentPanorama;
+			function ChangePanorama(panorama){
+				currentPanorama = panorama;
+				HideInfospots(); 
+				$("#loading").fadeIn();
+				//$(".customhotspot").fadeOut();
+				setTimeout(function(){
+					viewer.setPanorama(window[panorama]);
+				}, 100);
+				setTimeout(function(){
+					$("#" + panorama).fadeIn();
+				}, 1000);
+				
+			}
+			
+			
+			
+			
+			
+			function HideInfospots(){
+				$(".customhotspot").fadeOut();
+			}
+
+			/*customjs*//*customjs-end*/
+        </script>
+	</body>
+</html>
